@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  UIDevice+DeviceInfo.h
 //  CommentView
 //
 //  Created by ggt on 2018/2/7.
@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface UIDevice (DeviceInfo)
 
+/**
+ 获取设备类型
+ */
+- (NSString *)deviceName;
 
 @end
-
