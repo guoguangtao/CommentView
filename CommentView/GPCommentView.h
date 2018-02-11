@@ -9,13 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "Masonry.h"
 
+@protocol GPCommentViewDelegate;
+
 @interface GPCommentView : UIView
 
 #pragma mark - Property
-
+@property (nonatomic, weak) UIViewController *contoller;
 @property (nonatomic, weak) MASConstraint *bottomConstraint;
+@property (nonatomic, weak) id <GPCommentViewDelegate> delegate;
 
 
 #pragma mark - Method
+
+@end
+
+@protocol GPCommentViewDelegate <NSObject>
+
+- (void)commentViewDidSelectedImage:(GPCommentView *)commentView;
 
 @end

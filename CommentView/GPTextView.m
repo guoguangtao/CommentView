@@ -15,6 +15,9 @@
 @property (nonatomic, assign) CGFloat maxTextHeight; /**< 文本最大高度 */
 @property (nonatomic, strong) UILabel *placeholderLabel; /**< 占位文字 */
 
+@property (nonatomic, assign) BOOL autoChangeHeight; /**< 是否需要自动改变高度 */
+@property (nonatomic, copy) ChangeTextHeight changeTextHeightBlock;
+
 @end
 
 @implementation GPTextView
@@ -84,7 +87,7 @@
     if (numberOfLines == 0) {
         self.maxTextHeight = MAXFLOAT;
     } else {
-        self.maxTextHeight = self.font.lineHeight * numberOfLines + self.textContainerInset.top + self.textContainerInset.bottom;
+        self.maxTextHeight = ceilf(self.font.lineHeight * numberOfLines + self.textContainerInset.top + self.textContainerInset.bottom);
     }
 }
 
@@ -118,6 +121,11 @@
 
 #pragma mark - Public
 
+- (void)textHeightDidChange:(ChangeTextHeight)changeText {
+    
+    _changeTextHeightBlock = changeText;
+}
+
 
 #pragma mark - Private
 
@@ -130,17 +138,11 @@
     if (self.textHeight != height) { // 高度不一样，就改变了高度
         
         // 当高度大于最大高度时，需要滚动
-        self.scrollEnabled = height > self.maxTextHeight && self.maxTextHeight > 0;
-        
+        self.autoChangeHeight = height <= self.maxTextHeight && self.maxTextHeight > 0;
         self.textHeight = height;
         
-        //当不可以滚动（即 <= 最大高度）时，传值改变textView高度
-        if (self.scrollEnabled == NO) {
-            if (self.superview) {
-                [self.superview mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(height);
-                }];
-            }
+        if (self.changeTextHeightBlock) {
+            self.changeTextHeightBlock(self.text, self.textHeight, self.autoChangeHeight);
         }
     }
 }

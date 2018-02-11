@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^ChangeTextHeight)(NSString *text, CGFloat height, BOOL autoChangeHeight);
+
 @interface GPTextView : UITextView
 
 #pragma mark - Property
@@ -19,5 +21,7 @@
 
 
 #pragma mark - Method
+
+- (void)textHeightDidChange:(ChangeTextHeight)changeText;
 
 @end

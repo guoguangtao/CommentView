@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self setupUI];
     [self setupConstraints];
 }
@@ -40,6 +42,7 @@
     
     // 输入框
     _commentView = [[GPCommentView alloc] init];
+    _commentView.contoller = self;
     [self.view addSubview:_commentView];
 }
 
@@ -75,6 +78,8 @@
 
 
 #pragma mark - Protocol
+
+#pragma mark - GPCommentViewDelegate
 
 
 #pragma mark - 懒加载
