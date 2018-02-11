@@ -148,6 +148,7 @@
 		8A3B1EF0202ADE4100FEE5FC /* CommentView */ = {
 			isa = PBXGroup;
 			children = (
+				8A3D4A62202FEA9D00FDB89D /* GPCommentView */,
 				8A3B1F29202ADF1800FEE5FC /* Masonry */,
 				8A3B1EF1202ADE4100FEE5FC /* AppDelegate.h */,
 				8A3B1EF2202ADE4100FEE5FC /* AppDelegate.m */,
@@ -155,10 +156,6 @@
 				8A4C2A5E202C2C20009A813C /* ViewController.m */,
 				8A3B1F26202ADEC600FEE5FC /* GPController.h */,
 				8A3B1F27202ADEC600FEE5FC /* GPController.m */,
-				8A3B1F50202AE88900FEE5FC /* GPCommentView.h */,
-				8A3B1F51202AE88900FEE5FC /* GPCommentView.m */,
-				8A3B1F4D202AE81800FEE5FC /* GPTextView.h */,
-				8A3B1F4E202AE81800FEE5FC /* GPTextView.m */,
 				8A3B1F53202AEEA600FEE5FC /* UIDevice+DeviceInfo.h */,
 				8A3B1F54202AEEA600FEE5FC /* UIDevice+DeviceInfo.m */,
 				8A3B1EF7202ADE4100FEE5FC /* Main.storyboard */,
@@ -218,6 +215,17 @@
 				8A3B1F42202ADF1800FEE5FC /* MASViewAttribute.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		8A3D4A62202FEA9D00FDB89D /* GPCommentView */ = {
+			isa = PBXGroup;
+			children = (
+				8A3B1F50202AE88900FEE5FC /* GPCommentView.h */,
+				8A3B1F51202AE88900FEE5FC /* GPCommentView.m */,
+				8A3B1F4D202AE81800FEE5FC /* GPTextView.h */,
+				8A3B1F4E202AE81800FEE5FC /* GPTextView.m */,
+			);
+			path = GPCommentView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -8,7 +8,6 @@
 
 #import "GPCommentView.h"
 #import "GPTextView.h"
-#import "Masonry.h"
 
 @interface GPCommentView () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -20,6 +19,7 @@
 
 @property (nonatomic, weak) MASConstraint *textViewHeightConstraint; /**< 输入框高度 */
 @property (nonatomic, assign) CGFloat imageHeight; /**< 图片高度 */
+@property (nonatomic, assign) CGFloat commentHeight; /**< 评论框的高度 */
 
 @end
 
@@ -36,6 +36,7 @@
         self.layer.borderWidth = 1.0f;
         self.layer.masksToBounds = YES;
         self.imageHeight = 50;
+        self.commentHeight = 30;
         
         [self setupUI];
         [self setupConstraints];
@@ -114,7 +115,7 @@
     // 选择照片
     [self.chooseImageButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-12);
-        make.width.height.mas_equalTo(30);
+        make.width.height.mas_equalTo(self.commentHeight);
         make.bottom.equalTo(self);
     }];
     
@@ -128,21 +129,21 @@
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentScrollView);
         make.width.mas_equalTo(self.contentScrollView);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(self.commentHeight);
     }];
     
     // textView
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(self.commentHeight);
     }];
     
     // imageView
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.textView.mas_bottom);
         make.left.bottom.equalTo(self.contentView);
-        make.width.mas_equalTo(50);
-        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(self.imageHeight);
+        make.height.mas_equalTo(0);
     }];
 }
 
@@ -212,6 +213,9 @@
     [self layoutIfNeeded];
     
     if (autoChangeHeight) {
+        [self.imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.imageHeight);
+        }];
         BOOL isMoreThree = CGRectGetHeight(self.textView.frame) > CGRectGetHeight(self.contentScrollView.frame);
         if (isMoreThree) {
             // 设置输入框的高度
