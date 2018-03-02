@@ -14,10 +14,9 @@
 @property (nonatomic, strong) UIScrollView *contentScrollView; /**< 评论内容 */
 @property (nonatomic, strong) UIView *contentView; /**< 内容视图 */
 @property (nonatomic, strong) UIImageView *imageView; /**< 图片 */
-@property (nonatomic, strong) GPTextView *textView;
-@property (nonatomic, strong) UIButton *chooseImageButton;
+@property (nonatomic, strong) GPTextView *textView; /**< 输入框 */
+@property (nonatomic, strong) UIButton *chooseImageButton; /**< 选择图片按钮 */
 
-@property (nonatomic, weak) MASConstraint *textViewHeightConstraint; /**< 输入框高度 */
 @property (nonatomic, assign) CGFloat imageHeight; /**< 图片高度 */
 @property (nonatomic, assign) CGFloat commentHeight; /**< 评论框的高度 */
 
@@ -196,6 +195,9 @@
     }
 }
 
+/**
+ 更新底部约束
+ */
 - (void)updateBottomConstraintsWithHeight:(CGFloat)height duration:(CGFloat)duration {
     
     self.bottomConstraint.offset(-height);
@@ -226,7 +228,6 @@
             [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(CGRectGetHeight(self.textView.frame) + self.imageHeight);
             }];
-            [self layoutIfNeeded];
             [self.contentScrollView setContentOffset:CGPointMake(0, self.contentScrollView.contentSize.height - CGRectGetHeight(self.contentScrollView.frame)) animated:YES];
         } else {
             [self updateHeightWithHeight:self.textView.frame.size.height autoChangeHeight:autoChangeHeight];

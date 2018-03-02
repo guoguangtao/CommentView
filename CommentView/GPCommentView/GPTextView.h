@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^ChangeTextHeight)(NSString *text, CGFloat height, BOOL autoChangeHeight);
+typedef void (^ChangeTextHeight)(NSString *text, CGFloat height, BOOL autoChangeHeight); /**< 改变输入框高度回调 */
 
 @interface GPTextView : UITextView
 
@@ -22,6 +22,9 @@ typedef void (^ChangeTextHeight)(NSString *text, CGFloat height, BOOL autoChange
 
 #pragma mark - Method
 
+/**
+ 改变输入框的高度
+ */
 - (void)textHeightDidChange:(ChangeTextHeight)changeText;
 
 @end

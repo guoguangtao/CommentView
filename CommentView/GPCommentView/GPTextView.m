@@ -131,13 +131,13 @@
 
 - (void)textDidChange {
     
-    self.placeholderLabel.hidden = self.text.length > 0 ? YES : NO;
+    self.placeholderLabel.hidden = self.text.length > 0 ? YES : NO; // 占位文字的隐藏和显示
     
-    NSInteger height = ceilf([self sizeThatFits:CGSizeMake(self.bounds.size.width, MAXFLOAT)].height);
+    NSInteger height = ceilf([self sizeThatFits:CGSizeMake(self.bounds.size.width, MAXFLOAT)].height); // 计算出当前文字高度
     
-    if (self.textHeight != height) { // 高度不一样，就改变了高度
+    if (self.textHeight != height) { // 高度不一样，行数改变了
         
-        // 当高度大于最大高度时，需要滚动
+        // 是否需要改变 CommentView 的高度
         self.autoChangeHeight = height <= self.maxTextHeight && self.maxTextHeight > 0;
         self.textHeight = height;
         
